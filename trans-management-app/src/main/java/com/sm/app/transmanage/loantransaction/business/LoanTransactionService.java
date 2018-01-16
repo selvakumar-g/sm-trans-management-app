@@ -35,7 +35,11 @@ public class LoanTransactionService {
 	private LoanSequenceGen sequenceGen;
 
 	public List<LoanTransactionVO> findAll() {
-		return dozerMapper.mapList(repo.findAll(), LoanTransactionVO.class);
+		List<LoanTransaction> entityResult = repo.findAll();
+		if (entityResult != null && entityResult.size() > 0)
+			return dozerMapper.mapList(entityResult, LoanTransactionVO.class);
+		else
+			return null;
 	}
 
 	public List<LoanTransactionVO> save(LoanTransactionVO loanTransactionVO) {
@@ -53,11 +57,19 @@ public class LoanTransactionService {
 	}
 
 	public LoanTransactionVO find(String loanName, long sequenceNumber) {
-		return dozerMapper.map(repo.findOne(new LoanTransactionPK(loanName, sequenceNumber)), LoanTransactionVO.class);
+		LoanTransaction entityResult = repo.findOne(new LoanTransactionPK(loanName, sequenceNumber));
+		if (entityResult != null)
+			return dozerMapper.map(entityResult, LoanTransactionVO.class);
+		else
+			return null;
 	}
 
 	public List<LoanTransactionVO> findLoanTxn(String loanName) {
-		return dozerMapper.mapList(repo.findLoanTxn(loanName), LoanTransactionVO.class);
+		List<LoanTransaction> entityResult = repo.findLoanTxn(loanName);
+		if (entityResult != null && entityResult.size() > 0)
+			return dozerMapper.mapList(entityResult, LoanTransactionVO.class);
+		else
+			return null;
 	}
 
 }

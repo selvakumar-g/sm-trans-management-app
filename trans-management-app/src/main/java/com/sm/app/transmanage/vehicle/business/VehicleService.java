@@ -29,15 +29,16 @@ public class VehicleService {
 	private VehicleRepository repo;
 
 	public List<VehicleVO> save(VehicleVO vehicleVO) {
-		LOG.info("Saving Vehicle ..");
 		repo.save(dozerMapper.map(vehicleVO, Vehicle.class));
-		LOG.info("finished saving Vehicle .. !");
 		return findAll();
 	}
 
 	public List<VehicleVO> findAll() {
-		List<Vehicle> entityValues = repo.findAll();
-		return dozerMapper.mapList(entityValues, VehicleVO.class);
+		List<Vehicle> entityResult = repo.findAll();
+		if (entityResult != null && entityResult.size() > 0)
+			return dozerMapper.mapList(entityResult, VehicleVO.class);
+		else
+			return null;
 	}
 
 	public List<VehicleVO> delete(String vehicleName) {
@@ -50,7 +51,11 @@ public class VehicleService {
 	}
 
 	public List<VehicleVO> findVehicleLoans(String loanName) {
-		return dozerMapper.mapList(repo.findByLoan(loanName), VehicleVO.class);
+		List<Vehicle> entityResult = repo.findByLoan(loanName);
+		if (entityResult != null && entityResult.size() > 0)
+			return dozerMapper.mapList(entityResult, VehicleVO.class);
+		else
+			return null;		
 	}
 
 	public boolean isVehicleExist(String vehicleName) {

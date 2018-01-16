@@ -29,12 +29,16 @@ public class VehicleTransactionService {
 
 	@Autowired
 	private VehicleTransactionRepository repo;
-	
+
 	@Autowired
 	private VehicleSequenceGen sequenceGen;
 
 	public List<VehicleTransactionVO> findAll() {
-		return dozerMapper.mapList(repo.findAll(), VehicleTransactionVO.class);
+		List<VehicleTransaction> entityResult = repo.findAll();
+		if (entityResult != null && entityResult.size() > 0)
+			return dozerMapper.mapList(entityResult, VehicleTransactionVO.class);
+		else
+			return null;
 	}
 
 	public List<VehicleTransactionVO> save(VehicleTransactionVO VehicleTransactionVO) {
@@ -52,12 +56,19 @@ public class VehicleTransactionService {
 	}
 
 	public VehicleTransactionVO find(String vehicleName, long sequenceNumber) {
-		return dozerMapper.map(repo.findOne(new VehicleTransactionPK(vehicleName, sequenceNumber)),
-				VehicleTransactionVO.class);
+		VehicleTransaction entityResult = repo.findOne(new VehicleTransactionPK(vehicleName, sequenceNumber));
+		if (entityResult != null)
+			return dozerMapper.map(entityResult, VehicleTransactionVO.class);
+		else
+			return null;
 	}
 
 	public List<VehicleTransactionVO> findVehicleTxn(String vehicleName) {
-		return dozerMapper.mapList(repo.findVehicleTxn(vehicleName), VehicleTransactionVO.class);
+		List<VehicleTransaction> entityResult = repo.findVehicleTxn(vehicleName);
+		if (entityResult != null && entityResult.size() > 0)
+			return dozerMapper.mapList(entityResult, VehicleTransactionVO.class);
+		else
+			return null;
 	}
 
 }
