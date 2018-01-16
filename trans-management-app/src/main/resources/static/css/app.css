@@ -1,0 +1,108 @@
+.btn-delete span {
+	color: #563d7c;
+}
+
+.data-container .btn-delete {
+	margin-top: 0px;
+	padding-right: 5px;
+}
+
+.bd-navbar {
+	min-height: 4rem;
+	background-color: #563d7c;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0
+		rgba(0, 0, 0, .1);
+}
+
+.sub-header, .white-header {
+	background-color: #FFF !important;
+}
+
+.sub-header a, .white-header a {
+	color: #563d7c !important;
+}
+
+.nav-link.active {
+	font-weight: bold;
+}
+
+.tile_container .card {
+	border-color: #563d7c;
+	cursor: pointer;
+}
+
+.tile_container .card h4, .tile_container .card p {
+	color: #563d7c;
+}
+
+.tile_container i {
+	line-height: 1.5 !important;
+}
+
+.titleline {
+	color: #563d7c;
+	text-decoration: underline;
+}
+
+.bootstrap-select ul.dropdown-menu {
+	display: inline;
+}
+
+.bootstrap-select ul.dropdown-menu li {
+	margin-left: 12px !important;
+}
+
+.bootstrap-select ul.dropdown-menu a {
+	color: #495057;
+}
+
+.bootstrap-select button.dropdown-toggle {
+	background-color: #FFF;
+	border: 1px solid #ced4da;
+}
+
+.bootstrap-select {
+	display: block !important;
+	margin: 0;
+	width: 100% !important;
+}
+
+.bootstrap-select span.text {
+	width: 75%;
+	margin: 0;
+}
+
+.bootstrap-select .filter-option {
+	color: #495057;
+}
+
+}
+.dataTable thead tr th {
+	color: #563d7c;
+}
+
+.dataTable tbody tr {
+	cursor: pointer;
+}
+
+.dataTables_paginate .paginate_button.active a {
+	background-color: #563d7c;
+}
+
+.error-text {
+	color: #b70000;
+	font-weight: bold;
+	display: none;
+}
+
+.error-container .error-text {
+	display: block;
+}
+
+.error-container label {
+	color: #b70000;
+}
+
+.error-container input, .error-container select {
+	border-color: #b70000;
+}
