@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 @Embeddable
 public class LoanTransactionPK implements Serializable {
 
@@ -45,6 +47,26 @@ public class LoanTransactionPK implements Serializable {
 	public String toString() {
 		return new StringBuilder().append("loanName:").append(loanName).append(",").append("sequenceNumber:")
 				.append(sequenceNumber).toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof LoanTransactionPK))
+			return false;
+		LoanTransactionPK that = (LoanTransactionPK) obj;
+		if (that.getLoanName() == null
+				|| that.getLoanName().trim().length() == 0
+				|| that.getSequenceNumber() == 0 
+				|| this.getLoanName() == null
+				|| this.getLoanName().trim().length() == 0
+				|| this.getSequenceNumber() == 0)
+			return false;
+		return this.toString().equals(that.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 31).append(this.toString()).toHashCode();
 	}
 
 }
