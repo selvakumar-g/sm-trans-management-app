@@ -1,30 +1,27 @@
 # sm-trans-management-app
 SM Transport management App
 
-<u>Server side API's</u>
+<strong>Server side API's</strong>
+<ul>
+<li>Spring BOOT
+  <ul>
+<li>  Spring JPA</li>  
+<li>  Spring JDBC</li>  
+<li>  Spring REST</li>
+ </ul> </li>
+<li>Dozer</li>
+<li>Lombok</li>
+<li>H2 DB</li>
+  </ul>
 
-Spring BOOT
 
-  Spring JPA
-  
-  Spring JDBC
-  
-  Spring REST
-
-Dozer
-
-Lombok
-
-H2 DB
-
-Client side API's
-
-Bootstrap 4
-
-Jquery
-
-Jquery datatable
-
-Handlebar
-
-Jquery toast
+<strong>Client side API's</strong>
+<ul>
+<li>Bootstrap 4</li>
+<li>Jquery
+  <ul>
+    <li>Jquery datatable</li>
+    <li>Jquery toast</li>
+     </ul> </li>
+<li>Handlebar</li>
+  </ul>
