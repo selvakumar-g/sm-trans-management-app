@@ -1,10 +1,5 @@
 package com.sm.app.transmanage.sequencegen.business;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +10,10 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SchemaSetUpManager {
@@ -24,18 +23,27 @@ public class SchemaSetUpManager {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
+	public void clearSchema() throws SQLException {
+		if (validateSchema()) {
+			LOGGER.info("Tables present. hence clearSchema started..");
+			doProcess("drop_tables.sql");
+			LOGGER.info("Schema is cleared..");
+		} else
+			LOGGER.info("Tables are not present. hence clearschema aborted");
+	}
+
 	public void initiateSetup() throws SQLException {
-		if (!checkSchemaSetup()) {
+		if (!validateSchema()) {
 			LOGGER.info("Tables not present. hence initial set up started..");
-			doSetUp();
+			doProcess("tables.sql");
 			LOGGER.info("Table creation completed..");
-			printTablesCreated();
+			printTablesInfo();
 		} else
 			LOGGER.info("Tables present. hence intialsetup aborted");
 
 	}
 
-	private boolean checkSchemaSetup() throws SQLException {
+	private boolean validateSchema() throws SQLException {
 		Connection connection = jdbcTemplate.getDataSource().getConnection();
 		ResultSet resultSet = null;
 		try {
@@ -49,14 +57,14 @@ public class SchemaSetUpManager {
 		}
 	}
 
-	private void printTablesCreated() throws SQLException {
+	private void printTablesInfo() throws SQLException {
 		Connection connection = jdbcTemplate.getDataSource().getConnection();
 		ResultSet resultSet = null;
 		try {
 			DatabaseMetaData metaData = connection.getMetaData();
 			resultSet = metaData.getTables(null, null, null, new String[] { "TABLE" });
 			LOGGER.info("Tables created so far ..!! >>");
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				LOGGER.info(resultSet.getString("TABLE_NAME"));
 			}
 		} finally {
@@ -66,13 +74,13 @@ public class SchemaSetUpManager {
 		}
 	}
 
-	private void doSetUp() {
+	private void doProcess(String sqlFile) {
 		String line = null;
 		StringBuilder sbul = new StringBuilder();
 		InputStreamReader isr = null;
 		BufferedReader br = null;
 		try {
-			isr = new InputStreamReader(new ClassPathResource("tables.sql").getInputStream());
+			isr = new InputStreamReader(new ClassPathResource(sqlFile).getInputStream());
 			br = new BufferedReader(isr);
 			while ((line = br.readLine()) != null) {
 				sbul.append(line);
