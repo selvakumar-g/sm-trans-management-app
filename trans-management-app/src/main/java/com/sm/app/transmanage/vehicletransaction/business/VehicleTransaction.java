@@ -28,8 +28,6 @@ public class VehicleTransaction {
 
 	private Date transactionDate;
 
-	private String transactionType;
-	
 	private String transactionAttribute;
 
 	private int amount;
@@ -66,15 +64,6 @@ public class VehicleTransaction {
 		this.transactionDate = transactionDate;
 	}
 
-	@Column(name = "TRANSACTION_TYPE")
-	public String getTransactionType() {
-		return transactionType;
-	}
-
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-	}
-	
 	@Column(name = "TRANSACTION_ATTRIBUTE")
 	public String getTransactionAttribute() {
 		return transactionAttribute;
@@ -105,8 +94,8 @@ public class VehicleTransaction {
 	@Override
 	public String toString() {
 		return new StringBuilder().append("vehicleManagementPK:").append(getVehicleTransactionPK().toString())
-				.append(",").append("transactionDate:").append(transactionDate).append(",").append("transactionType:")
-				.append(transactionType).append(",").append("amount:").append(amount).toString();
+				.append(",").append("transactionDate:").append(transactionDate).append(",").append("transactionAttribute: ")
+				.append(transactionAttribute).append(",").append("amount:").append(amount).toString();
 	}
 
 	@Override

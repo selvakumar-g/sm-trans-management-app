@@ -134,10 +134,6 @@
 			<b>transactionDate</b>
 		</field>
 		<field>
-			<a>transactionType</a>
-			<b>transactionType</b>
-		</field>
-		<field>
 			<a>transactionAttribute</a>
 			<b>transactionAttribute</b>
 		</field>	

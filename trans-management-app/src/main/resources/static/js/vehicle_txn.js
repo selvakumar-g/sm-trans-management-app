@@ -6,8 +6,8 @@ $(document).ready(
 				todayHighlight : true
 			});
 			
-			var fieldTypes = ["vehicle_txn_type", "vehicle_txn_attribute"];
-			var flTypeMapping = {"vehicle_txn_type" : "transactionType", "vehicle_txn_attribute":"transactionAttribute"};
+			var fieldTypes = ["vehicle_txn_attribute"];
+			var flTypeMapping = {"vehicle_txn_attribute":"transactionAttribute"};
 			UTIL.send('/onetime/findOneTimes', fieldTypes, onetimeCallback);			
 			function onetimeCallback(data){
 				if(data != null && data.details != null){					
@@ -76,7 +76,6 @@ function CreateVehicleTxn() {
 	this.vehicleName = $('#vehicleName').val();
 	this.description = $('#description').val();
 	this.transactionDate = $('#transactionDate').val();
-	this.transactionType = $('#transactionType').val();
 	this.amount = $('#amount').val();
 	this.sequenceNumber = $('#transactionRef').val();
 	this.transactionAttribute = $('#transactionAttribute').val();
@@ -87,7 +86,6 @@ function resetOrPopulateForm(data, clearTxn) {
 		$('#vehicleName').val(data == null ? "" : data.vehicleName);
 	$('#description').val(data == null ? "" : data.description);
 	$('#transactionDate').val(data == null ? "" : data.transactionDate);
-	$('#transactionType').val(data == null ? "" : data.transactionType);
 	$('#amount').val(data == null ? 0 : data.amount);
 	$('#transactionRef').val(data == null ? 0 : data.sequenceNumber);
 	$('#transactionAttribute').val(data == null ? 0 : data.transactionAttribute);
@@ -137,9 +135,9 @@ function createDataTable(dataSet) {
 										data : "transactionDate"
 									},
 									{
-										title : "Transaction Type",
-										name : "Transaction Type",
-										data : "transactionType"
+										title : "Transaction Attribute",
+										name : "Transaction Attribute",
+										data : "transactionAttribute"
 									},
 									{
 										title : "Amount",

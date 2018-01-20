@@ -46,10 +46,6 @@ public @Data class VehicleTransactionVO implements Serializable {
 	@Setter
 	private Date transactionDate;
 
-	@Getter(onMethod_ = @NotBlank(message = "Traansaction type cannot be empty"))
-	@Setter
-	private String transactionType;
-
 	@Getter(onMethod_ = @Range(min = 1, message = "Amount cannot be empty or zero"))
 	@Setter
 	private double amount;

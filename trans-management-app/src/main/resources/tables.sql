@@ -30,7 +30,6 @@ VEHICLE_NAME varchar(150),
 SEQUENCE_NUMBER int,
 DESCRIPTION varchar(150),
 TRANSACTION_DATE DATE,
-TRANSACTION_TYPE varchar(20),
 TRANSACTION_ATTRIBUTE varchar(20),
 AMOUNT int,
 LAST_UPDATED_TIME timestamp
@@ -77,9 +76,6 @@ INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_type', 'Lorry');
 
 INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_status', 'Active');
 INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_status', 'Inactive');
-
-INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_txn_type', 'Credit');
-INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_txn_type', 'Debit');
 
 INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_txn_attribute', 'Fuel');
 INSERT INTO ONE_TIME (FIELD_TYPE, FIELD_VAL) values ('vehicle_txn_attribute', 'Tollgate');

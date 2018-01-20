@@ -81,7 +81,6 @@ public class ApplicationTester implements CommandLineRunner {
 		vmvo.setAmount(110.33);
 		vmvo.setDescription("desc");
 		vmvo.setTransactionDate(new Date());
-		vmvo.setTransactionType("C");
 		vmvo.setSequenceNumber(vehicleSeqGen.nextIntValue());
 		vmvo.setVehicleName("v1");
 		vmvo.setLastupdatedTime(Timestamp.valueOf(LocalDateTime.now()));
