@@ -22,22 +22,31 @@ public class DozerMapper {
 	DozerBeanMapper dozerBeanMapper;
 
 	public <T, S> Collection<T> mapCollection(Collection<S> source, Class<T> destinationClass) {
-		Collection<T> result = new ArrayList<T>();
-		source.stream().forEach(o -> {
-			result.add(dozerBeanMapper.map(o, destinationClass));
-		});
-		return result;
+		if (source != null && source.size() > 0) {
+			Collection<T> result = new ArrayList<T>();
+			source.stream().forEach(o -> {
+				result.add(map(o, destinationClass));
+			});
+			return result;
+		} else
+			return null;
 	}
-	
+
 	public <T, S> List<T> mapList(List<S> source, Class<T> destinationClass) {
-		List<T> result = new ArrayList<T>();
-		source.stream().forEach(o -> {
-			result.add(dozerBeanMapper.map(o, destinationClass));
-		});
-		return result;
+		if (source != null && source.size() > 0) {
+			List<T> result = new ArrayList<T>();
+			source.stream().forEach(o -> {
+				result.add(map(o, destinationClass));
+			});
+			return result;
+		} else
+			return null;
 	}
-	
+
 	public <T, S> T map(S source, Class<T> destinationClass) {
-		return dozerBeanMapper.map(source, destinationClass);
+		if (source != null)
+			return dozerBeanMapper.map(source, destinationClass);
+		else
+			return null;
 	}
 }

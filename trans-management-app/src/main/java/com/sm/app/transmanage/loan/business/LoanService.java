@@ -33,11 +33,7 @@ public class LoanService {
 	}
 
 	public List<LoanVO> findAll() {
-		List<Loan> entityResult = repo.findAll();
-		if (entityResult != null && entityResult.size() > 0)
 			return dozerMapper.mapList(repo.findAll(), LoanVO.class);
-		else
-			return null;
 	}
 
 	public List<LoanVO> delete(String loanName) {
@@ -46,11 +42,7 @@ public class LoanService {
 	}
 
 	public LoanVO find(String loanName) {
-		Loan entity = repo.findOne(loanName);
-		if (entity != null)
 			return dozerMapper.map(repo.findOne(loanName), LoanVO.class);
-		else
-			return null;
 	}
 
 	public boolean isLoanExist(String loanName) {

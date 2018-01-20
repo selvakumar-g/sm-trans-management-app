@@ -30,5 +30,7 @@ public class RevenueService {
 
 	@Autowired
 	VehicleTransactionService vehicleTxnService;
+	
+	
 
 }

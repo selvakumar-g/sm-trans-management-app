@@ -34,11 +34,7 @@ public class VehicleService {
 	}
 
 	public List<VehicleVO> findAll() {
-		List<Vehicle> entityResult = repo.findAll();
-		if (entityResult != null && entityResult.size() > 0)
-			return dozerMapper.mapList(entityResult, VehicleVO.class);
-		else
-			return null;
+		return dozerMapper.mapList(repo.findAll(), VehicleVO.class);
 	}
 
 	public List<VehicleVO> delete(String vehicleName) {
@@ -51,11 +47,7 @@ public class VehicleService {
 	}
 
 	public List<VehicleVO> findVehicleLoans(String loanName) {
-		List<Vehicle> entityResult = repo.findByLoan(loanName);
-		if (entityResult != null && entityResult.size() > 0)
-			return dozerMapper.mapList(entityResult, VehicleVO.class);
-		else
-			return null;		
+		return dozerMapper.mapList(repo.findByLoan(loanName), VehicleVO.class);
 	}
 
 	public boolean isVehicleExist(String vehicleName) {
