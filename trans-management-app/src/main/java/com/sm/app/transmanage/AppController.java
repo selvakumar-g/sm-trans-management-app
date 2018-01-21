@@ -14,6 +14,7 @@ public class AppController {
 	private static final String ONETIME_PAGE = "onetime";
 	private static final String VEHICLE_PAGE = "vehicle";
 	private static final String VEHICLE_TRANSACTION_PAGE = "vehicle_txn";
+	private static final String REVENUE_PAGE = "revenue";
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
 	public ModelAndView renderHome(ModelAndView modelAndView) {
@@ -48,6 +49,12 @@ public class AppController {
 	@RequestMapping(value = "/vehicle_txn", method = RequestMethod.GET, produces = "text/html")
 	public ModelAndView renderVehicleTxn(ModelAndView modelAndView) {
 		modelAndView.setViewName(VEHICLE_TRANSACTION_PAGE);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/revenue", method = RequestMethod.GET, produces = "text/html")
+	public ModelAndView renderRevenue(ModelAndView modelAndView) {
+		modelAndView.setViewName(REVENUE_PAGE);
 		return modelAndView;
 	}
 
