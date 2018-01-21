@@ -24,15 +24,18 @@ public class SchemaSetUpManager {
 	JdbcTemplate jdbcTemplate;
 
 	public void clearSchema() throws SQLException {
+		LOGGER.info("\n\n");
 		if (validateSchema()) {
 			LOGGER.info("Tables present. hence clearSchema started..");
 			doProcess("drop_tables.sql");
 			LOGGER.info("Schema is cleared..");
 		} else
 			LOGGER.info("Tables are not present. hence clearschema aborted");
+		LOGGER.info("\n\n");
 	}
 
 	public void initiateSetup() throws SQLException {
+		LOGGER.info("\n\n");
 		if (!validateSchema()) {
 			LOGGER.info("Tables not present. hence initial set up started..");
 			doProcess("tables.sql");
@@ -40,6 +43,7 @@ public class SchemaSetUpManager {
 			printTablesInfo();
 		} else
 			LOGGER.info("Tables present. hence intialsetup aborted");
+		LOGGER.info("\n\n");
 
 	}
 
