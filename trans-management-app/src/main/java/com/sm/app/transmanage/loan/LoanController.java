@@ -46,7 +46,8 @@ public class LoanController {
 		} else {
 			result.setDetails(loanService.save(LoanVO));
 		}
-		return new ResponseEntity<Wrapper<List<LoanVO>>>(result, result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
+		return new ResponseEntity<Wrapper<List<LoanVO>>>(result,
+				result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
 	@RequestMapping(path = "/loan/findAll", method = RequestMethod.POST, produces = "application/JSON")
@@ -63,12 +64,11 @@ public class LoanController {
 		if ((vehicles == null || vehicles.size() == 0) && (txns == null || txns.size() == 0))
 			wrapper.setDetails(loanService.delete(loanName));
 		else {
-			if(vehicles != null && vehicles.size() > 0)
-			wrapper.addError("Loan is configured for the vehicles",
-					vehicles.stream().map(VehicleVO::getVehicleName).collect(toList()));
-			if(txns != null && txns.size() > 0)
-			wrapper.addError("Transactions present for the loan",
-					txns.stream().map(LoanTransactionVO::getDescription).collect(toList()));
+			if (vehicles != null && vehicles.size() > 0)
+				wrapper.addError("Loan is configured for the vehicles",
+						vehicles.stream().map(VehicleVO::getVehicleName).collect(toList()));
+			if (txns != null && txns.size() > 0)
+				wrapper.addError("Transactions present for the loan", null);
 		}
 		return new ResponseEntity<Wrapper<List<LoanVO>>>(wrapper,
 				wrapper.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);

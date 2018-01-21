@@ -1,6 +1,5 @@
 package com.sm.app.transmanage.vehicle;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.List;
@@ -58,8 +57,7 @@ public class VehicleController {
 		if (txns == null || txns.size() == 0) {
 			wrapper.setDetails(vehicleService.delete(vehicleName));
 		} else
-			wrapper.addError("Transactions present for the vehicle",
-					txns.stream().map(VehicleTransactionVO::getDescription).collect(toList()));
+			wrapper.addError("Transactions present for the vehicle", null);
 		return new ResponseEntity<Wrapper<List<VehicleVO>>>(wrapper,
 				wrapper.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
