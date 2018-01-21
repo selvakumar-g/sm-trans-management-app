@@ -24,7 +24,7 @@ public class LoanTransaction {
 	@EmbeddedId
 	private LoanTransactionPK loanTransactionPK;
 
-	private String description;
+	private String remarks;
 
 	private Date transactionDate;
 
@@ -46,13 +46,13 @@ public class LoanTransaction {
 		this.loanTransactionPK = loanTransactionPK;
 	}
 
-	@Column(name = "DESCRIPTION")
-	public String getDescription() {
-		return description;
+	@Column(name = "REMARKS")
+	public String getRemarks() {
+		return remarks;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	@Column(name = "TRANSACTION_DATE")

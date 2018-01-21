@@ -36,9 +36,7 @@ public @Data class VehicleTransactionVO implements Serializable {
 
 	private long sequenceNumber;
 
-	@Getter(onMethod_ = @NotBlank(message = "Description cannot be empty"))
-	@Setter
-	private String description;
+	private String remarks;
 
 	@Getter(onMethod_ = { @JsonSerialize(using = JsonDateSerializer.class),
 			@JsonDeserialize(using = JsonDateDeserializer.class),
