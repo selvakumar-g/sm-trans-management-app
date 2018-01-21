@@ -79,7 +79,7 @@ public class ApplicationTester implements CommandLineRunner {
 
 		VehicleTransactionVO vmvo = new VehicleTransactionVO();
 		vmvo.setAmount(110.33);
-		vmvo.setDescription("desc");
+		vmvo.setRemarks("desc");
 		vmvo.setTransactionDate(new Date());
 		vmvo.setSequenceNumber(vehicleSeqGen.nextIntValue());
 		vmvo.setVehicleName("v1");
@@ -89,7 +89,7 @@ public class ApplicationTester implements CommandLineRunner {
 
 		LoanTransactionVO lmvo = new LoanTransactionVO();
 		lmvo.setAmount(71717171.99);
-		lmvo.setDescription("des");
+		lmvo.setRemarks("des");
 		lmvo.setLoanName("l1");
 		lmvo.setTransactionDate(new Date());
 		lmvo.setTransactionType("I");
