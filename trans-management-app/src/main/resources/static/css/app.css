@@ -106,3 +106,7 @@
 .error-container input, .error-container select {
 	border-color: #b70000;
 }
+
+.shutdown{
+	color : rgb(205, 92, 92) !important;
+}
