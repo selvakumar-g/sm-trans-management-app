@@ -92,24 +92,16 @@
 							<option value="">Choose</option>
 					</select>
 						<div class="error-text mt-2"></div></div>
+					<div class="col-md-4 mb-3"><label>Transaction
+							reference</label> <input type="text" class="form-control"
+						id="transactionRef" disabled="true" /></div>
 			</div>
 				<div class="form-row">
-					<div class="col-md-4 mb-3"><label>description</label> <input
-						type="text" class="form-control" id="description"
-						placeholder="Enter description"
-						data-rules="[{'mandatory' : 'Description cannot be empty'}]" />
-						<div class="error-text mt-2"></div></div>
 					<div class="col-md-4 mb-3"><label>Loan transaction
 							date</label> <input type="text" class="form-control datepicker"
 						id="transactionDate" placeholder="Enter transaction date"
 						data-rules="[{'mandatory' : 'Transaction date cannot be empty or zero'}]" />
 						<div class="error-text mt-2"></div></div>
-					<div class="col-md-4 mb-3"><label>Transaction
-							reference</label> <input type="text" class="form-control"
-						id="transactionRef" disabled="true" /></div>
-			</div>
-
-				<div class="form-row">
 					<div class="col-md-4 mb-3"><label>Transaction type</label> <select
 						class="custom-select" id="transactionType"
 						data-rules="[{'mandatory' : 'Transaction type cannot be empty'}]">
@@ -120,6 +112,14 @@
 						type="text" class="form-control" id="amount"
 						placeholder="Enter amount"
 						data-rules="[{'number_mandatory' : 'Amount cannot be empty or zero'}]" />
+						<div class="error-text mt-2"></div></div>
+
+			</div>
+
+				<div class="form-row">
+					<div class="col-md-4 mb-3"><label>Remarks</label> <textarea
+						class="form-control" id="remarks" rows="3"
+						placeholder="Enter remarks"></textarea>
 						<div class="error-text mt-2"></div></div>
 			</div>
 				<div class="form-row">

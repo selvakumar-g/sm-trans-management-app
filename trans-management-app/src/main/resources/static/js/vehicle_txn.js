@@ -5,24 +5,28 @@ $(document).ready(
 				format : 'dd-M-yyyy',
 				todayHighlight : true
 			});
-			
-			var fieldTypes = ["vehicle_txn_attribute"];
-			var flTypeMapping = {"vehicle_txn_attribute":"transactionAttribute"};
-			UTIL.send('/onetime/findOneTimes', fieldTypes, onetimeCallback);			
-			function onetimeCallback(data){
-				if(data != null && data.details != null){					
-					for (oneTimeMapKey in data.details){						
-						$(data.details[oneTimeMapKey]).each(function(idx, onetime){
-							$('#'+flTypeMapping[oneTimeMapKey]).append(
-									'<option value="' + onetime.fieldVal
-											+ '">' + onetime.fieldVal
-											+ '</option>');
-						});
+
+			var fieldTypes = [ "vehicle_txn_attribute" ];
+			var flTypeMapping = {
+				"vehicle_txn_attribute" : "transactionAttribute"
+			};
+			UTIL.send('/onetime/findOneTimes', fieldTypes, onetimeCallback);
+			function onetimeCallback(data) {
+				if (data != null && data.details != null) {
+					for (oneTimeMapKey in data.details) {
+						$(data.details[oneTimeMapKey]).each(
+								function(idx, onetime) {
+									$('#' + flTypeMapping[oneTimeMapKey])
+											.append(
+													'<option value="'
+															+ onetime.fieldVal
+															+ '">'
+															+ onetime.fieldVal
+															+ '</option>');
+								});
 					}
 				}
 			}
-			
-			
 
 			UTIL.send('/vehicle/findAll', null, findAllVehicleCallback);
 
@@ -74,7 +78,7 @@ $(document).ready(
 
 function CreateVehicleTxn() {
 	this.vehicleName = $('#vehicleName').val();
-	this.description = $('#description').val();
+	this.remarks = $('#remarks').val();
 	this.transactionDate = $('#transactionDate').val();
 	this.amount = $('#amount').val();
 	this.sequenceNumber = $('#transactionRef').val();
@@ -84,11 +88,12 @@ function CreateVehicleTxn() {
 function resetOrPopulateForm(data, clearTxn) {
 	if (clearTxn)
 		$('#vehicleName').val(data == null ? "" : data.vehicleName);
-	$('#description').val(data == null ? "" : data.description);
+	$('#remarks').val(data == null ? "" : data.remarks);
 	$('#transactionDate').val(data == null ? "" : data.transactionDate);
 	$('#amount').val(data == null ? 0 : data.amount);
 	$('#transactionRef').val(data == null ? 0 : data.sequenceNumber);
-	$('#transactionAttribute').val(data == null ? 0 : data.transactionAttribute);
+	$('#transactionAttribute')
+			.val(data == null ? 0 : data.transactionAttribute);
 	$('#vehicleName').prop('disabled', data == null ? false : true);
 	UTIL.scrollToTop();
 }
@@ -125,11 +130,6 @@ function createDataTable(dataSet) {
 										data : "sequenceNumber"
 									},
 									{
-										title : "Description",
-										name : "Description",
-										data : "description"
-									},
-									{
 										title : "Transaction Date",
 										name : "Transaction Date",
 										data : "transactionDate"
@@ -143,6 +143,11 @@ function createDataTable(dataSet) {
 										title : "Amount",
 										name : "Amount",
 										data : "amount"
+									},
+									{
+										title : "Remarks",
+										name : "Remarks",
+										data : "remarks"
 									},
 									{
 										title : "Action",

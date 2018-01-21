@@ -69,7 +69,7 @@ $(document).ready(
 
 function CreateLoanTxn() {
 	this.loanName = $('#loan_name').val();
-	this.description = $('#description').val();
+	this.remarks = $('#remarks').val();
 	this.transactionDate = $('#transactionDate').val();
 	this.transactionType = $('#transactionType').val();
 	this.amount = $('#amount').val();
@@ -79,7 +79,7 @@ function CreateLoanTxn() {
 function resetOrPopulateForm(data, clearLoan) {
 	if (clearLoan)
 		$('#loan_name').val(data == null ? "" : data.loanName);
-	$('#description').val(data == null ? "" : data.description);
+	$('#remarks').val(data == null ? "" : data.remarks);
 	$('#transactionDate').val(data == null ? "" : data.transactionDate);
 	$('#transactionType').val(data == null ? "" : data.transactionType);
 	$('#amount').val(data == null ? 0 : data.amount);
@@ -120,11 +120,6 @@ function createDataTable(dataSet) {
 										data : "sequenceNumber"
 									},
 									{
-										title : "Description",
-										name : "Description",
-										data : "description"
-									},
-									{
 										title : "Transaction Date",
 										name : "Transaction Date",
 										data : "transactionDate"
@@ -138,6 +133,11 @@ function createDataTable(dataSet) {
 										title : "Amount",
 										name : "Amount",
 										data : "amount"
+									},
+									{
+										title : "Remarks",
+										name : "Remarks",
+										data : "remarks"
 									},
 									{
 										title : "Action",

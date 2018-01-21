@@ -24,7 +24,7 @@ public class VehicleTransaction {
 	@EmbeddedId
 	private VehicleTransactionPK vehicleTransactionPK;
 
-	private String description;
+	private String remarks;
 
 	private Date transactionDate;
 
@@ -46,13 +46,13 @@ public class VehicleTransaction {
 		this.vehicleTransactionPK = vehicleTransactionPK;
 	}
 
-	@Column(name = "DESCRIPTION")
-	public String getDescription() {
-		return description;
+	@Column(name = "REMARKS")
+	public String getRemarks() {
+		return remarks;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	@Column(name = "TRANSACTION_DATE")
@@ -94,8 +94,9 @@ public class VehicleTransaction {
 	@Override
 	public String toString() {
 		return new StringBuilder().append("vehicleManagementPK:").append(getVehicleTransactionPK().toString())
-				.append(",").append("transactionDate:").append(transactionDate).append(",").append("transactionAttribute: ")
-				.append(transactionAttribute).append(",").append("amount:").append(amount).toString();
+				.append(",").append("transactionDate:").append(transactionDate).append(",")
+				.append("transactionAttribute: ").append(transactionAttribute).append(",").append("amount:")
+				.append(amount).toString();
 	}
 
 	@Override
