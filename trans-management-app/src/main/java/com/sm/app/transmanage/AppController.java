@@ -15,6 +15,8 @@ public class AppController {
 	private static final String VEHICLE_PAGE = "vehicle";
 	private static final String VEHICLE_TRANSACTION_PAGE = "vehicle_txn";
 	private static final String REVENUE_PAGE = "revenue";
+	
+	private static final String HEADER = "header";
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
 	public ModelAndView renderHome(ModelAndView modelAndView) {
@@ -55,6 +57,12 @@ public class AppController {
 	@RequestMapping(value = "/revenue", method = RequestMethod.GET, produces = "text/html")
 	public ModelAndView renderRevenue(ModelAndView modelAndView) {
 		modelAndView.setViewName(REVENUE_PAGE);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/header", method = RequestMethod.GET, produces = "text/html")
+	public ModelAndView getHeader(ModelAndView modelAndView) {
+		modelAndView.setViewName(HEADER);
 		return modelAndView;
 	}
 
