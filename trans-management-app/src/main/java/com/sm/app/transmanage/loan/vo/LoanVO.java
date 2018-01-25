@@ -56,7 +56,12 @@ public @Data class LoanVO implements Serializable {
 	@Getter(onMethod_ = @Range(min = 1, message = "Loan period cannot be empty or zero"))
 	@Setter
 	private int loanPeriod;
+	
+	
+	@Getter(onMethod_ = @NotBlank(message = "Loan type cannot be empty"))
+	@Setter
+	private String loanType;
 
-	private String operationFlag;
+	
 
 }

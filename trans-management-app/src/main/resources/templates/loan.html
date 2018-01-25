@@ -26,7 +26,7 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>sm-app:Loan</title>
+<title>sm-app: Loan</title>
 </head>
 <body>
 	<header> </header>
@@ -41,14 +41,14 @@
 						placeholder="Enter loan name"
 						data-rules="[{ 'mandatory' : 'Loan name cannot be empty' }]" />
 						<div class="error-text mt-2"></div></div>
-			</div>
-				<div class="form-row">
+
 					<div class="col-md-4 mb-3"><label>Loan description</label> <input
 						type="text" class="form-control " id="loan_description"
 						placeholder="Enter loan description"
 						data-rules="[{'mandatory' : 'Loan description cannot be empty'}]" />
 						<div class="error-text mt-2"></div></div>
-
+			</div>
+				<div class="form-row">
 					<div class="col-md-4 mb-3"><label>Loan start date</label> <input
 						type="text" class="form-control datepicker" id="loan_startdate"
 						placeholder="Enter start date"
@@ -59,6 +59,13 @@
 						type="text" class="form-control datepicker" id="loan_enddate"
 						placeholder="Enter end date" />
 						<div class="error-text mt-2"></div></div>
+
+					<div class="col-md-4 mb-3"><label>Loan type</label> <select
+						class="custom-select " id="loan_type"
+						data-rules="[{'mandatory' : 'Loan type cannot be empty'}]">
+							<option value="">Choose..</option>
+					</select>
+						<div class="error-text mt-2"></div></div>
 			</div>
 
 				<div class="form-row">
@@ -67,11 +74,13 @@
 						placeholder="Enter loan amount"
 						data-rules="[{'number_mandatory' : 'Loan amount cannot be empty or zero'}]" />
 						<div class="error-text mt-2"></div></div>
+
 					<div class="col-md-4 mb-3"><label>Loan period</label> <input
 						type="text" class="form-control" id="loan_period"
 						placeholder="Enter loan period"
 						data-rules="[{'number_mandatory' : 'Loan period cannot be empty or zero'}]" />
 						<div class="error-text mt-2"></div></div>
+
 					<div class="col-md-4 mb-3"><label>Loan status</label> <select
 						class="custom-select " id="loan_status"
 						data-rules="[{'mandatory' : 'Loan status cannot be empty'}]">

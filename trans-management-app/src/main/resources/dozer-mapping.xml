@@ -78,6 +78,10 @@
 		<field>
 			<a>loanPeriod</a>
 			<b>loanPeriod</b>
+		</field>
+		<field>
+			<a>loanType</a>
+			<b>loanType</b>
 		</field>		
 	</mapping>
 	

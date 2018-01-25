@@ -35,6 +35,8 @@ public class Loan {
 
 	private int loanPeriod;
 
+	private String loanType;
+
 	public Loan() {
 
 	}
@@ -100,6 +102,15 @@ public class Loan {
 
 	public void setLoanPeriod(int loanPeriod) {
 		this.loanPeriod = loanPeriod;
+	}
+
+	@Column(name = "LOAN_TYPE")
+	public String getLoanType() {
+		return loanType;
+	}
+
+	public void setLoanType(String loanType) {
+		this.loanType = loanType;
 	}
 
 	@Override

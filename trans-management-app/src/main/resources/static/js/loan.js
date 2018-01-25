@@ -6,8 +6,8 @@ $(document).ready(
 				todayHighlight : true
 			});
 			
-			var fieldTypes = ["loan_status"];
-			var flTypeMapping = {"loan_status" : "loan_status"};
+			var fieldTypes = ["loan_status", "loan_type"];
+			var flTypeMapping = {"loan_status" : "loan_status", "loan_type" : "loan_type"};
 			UTIL.send('/onetime/findOneTimes', fieldTypes, onetimeCallback);			
 			function onetimeCallback(data){
 				if(data != null && data.details != null){					
@@ -78,6 +78,7 @@ function CreateLoan() {
 	this.loanEndDate = $('#loan_enddate').val();
 	this.loanStatus = $('#loan_status').val();
 	this.loanPeriod = $('#loan_period').val();
+	this.loanType = $('#loan_type').val();
 }
 
 function resetOrPopulateForm(data) {
@@ -89,6 +90,7 @@ function resetOrPopulateForm(data) {
 	$('#loan_amount').val(data == null ? 0 : data.details.loanAmount);
 	$('#loan_status').val(data == null ? "" : data.details.loanStatus);
 	$('#loan_period').val(data == null ? 0 : data.details.loanPeriod);
+	$('#loan_type').val(data == null ? 0 : data.details.loanType);
 	$('#loan_name').prop('disabled', data == null ? false : true);
 	UTIL.scrollToTop();
 }
