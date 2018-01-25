@@ -7,6 +7,10 @@
 	padding-right: 5px;
 }
 
+.data-container > p{
+	margin-bottom : 5px;
+}
+
 .bd-navbar {
 	min-height: 4rem;
 	background-color: #563d7c;

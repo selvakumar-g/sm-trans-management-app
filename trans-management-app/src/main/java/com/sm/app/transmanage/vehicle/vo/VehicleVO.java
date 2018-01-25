@@ -42,8 +42,6 @@ public @Data class VehicleVO implements Serializable {
 
 	private long investment;
 
-	private String vehicleLoans;
-
-	private String operationFlag;
+	private String vehicleLoans;	
 
 }
