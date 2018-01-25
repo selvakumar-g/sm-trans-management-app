@@ -1,3 +1,9 @@
+header div:not(:first-of-type) {
+	width : 100%;
+	position : absolute;
+	z-index : 1000;
+}
+
 .btn-delete span {
 	color: #563d7c;
 }
@@ -7,8 +13,8 @@
 	padding-right: 5px;
 }
 
-.data-container > p{
-	margin-bottom : 5px;
+.data-container>p {
+	margin-bottom: 5px;
 }
 
 .bd-navbar {
@@ -111,6 +117,6 @@
 	border-color: #b70000;
 }
 
-.shutdown{
-	color : rgb(205, 92, 92) !important;
+.shutdown {
+	color: rgb(205, 92, 92) !important;
 }
