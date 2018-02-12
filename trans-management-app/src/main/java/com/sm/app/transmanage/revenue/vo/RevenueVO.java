@@ -15,6 +15,8 @@ public class RevenueVO {
 
 	private double expense;
 
+	private double profit;
+
 	private List<VehicleTransactionVO> transactions;
 
 	public RevenueVO(String vehicleName, Date date) {
@@ -55,7 +57,7 @@ public class RevenueVO {
 	}
 
 	public double getProfit() {
-		return earning - expense;
+		return profit;
 	}
 
 	public List<VehicleTransactionVO> getTransactions() {
@@ -68,10 +70,12 @@ public class RevenueVO {
 
 	public void addEarning(double value) {
 		earning += value;
+		profit = earning - expense;
 	}
 
 	public void addExpense(double value) {
 		expense += value;
+		profit = earning - expense;
 	}
 
 }

@@ -20,7 +20,7 @@ public class RevenueController {
 	@Autowired
 	private RevenueService service;
 
-	@RequestMapping(path = "/revenue/find/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/revenue/findRevenueForVehicle/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<RevenueVO>>> findRevenueForVehicle(
 			@PathVariable("vehicleName") String vehicleName) {
 		List<RevenueVO> result = service.findRevenueForVehicle(vehicleName);
