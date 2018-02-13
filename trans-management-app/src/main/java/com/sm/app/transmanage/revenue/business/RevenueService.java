@@ -2,6 +2,7 @@ package com.sm.app.transmanage.revenue.business;
 
 import static java.util.stream.Collectors.groupingBy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -31,13 +32,14 @@ public class RevenueService {
 	public List<RevenueVO> findRevenueForVehicle(String vehicleName) {
 		List<VehicleTransactionVO> vTxnList = vehicleTxnService.findVehicleTxn(vehicleName);
 		List<String> profitAttributes = Arrays.asList(profitAttribute.split(","));
-		List<RevenueVO> result = null;
+		List<RevenueVO> result = new ArrayList<RevenueVO>();
 		if (vTxnList != null) {
 			Map<Date, List<VehicleTransactionVO>> vTxnGroup = vTxnList.stream()
 					.collect(groupingBy(VehicleTransactionVO::getTransactionDate));
 			vTxnGroup.forEach((date, txnList) -> {
 				RevenueVO vo = new RevenueVO(vehicleName, date);
 				vo.setTransactions(txnList);
+				result.add(vo);
 				txnList.stream().forEach(txn -> {
 					if (profitAttributes.contains(txn.getTransactionAttribute()))
 						vo.addEarning(txn.getAmount());
@@ -45,6 +47,7 @@ public class RevenueService {
 						vo.addExpense(txn.getAmount());
 
 				});
+				
 			});
 		}
 		return result;
