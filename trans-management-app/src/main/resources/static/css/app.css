@@ -95,12 +95,11 @@ header div:not(:first-of-type) {
 	cursor: pointer;
 }
 
-.dataTables_paginate .paginate_button.active {
-	border-color: #563d7c;
-}
+ 
 
-.dataTables_paginate .paginate_button.active  {
+.dataTables_paginate .paginate_button.active  .page-link{
 	background-color: #563d7c;
+	border-color: #563d7c;
 }
 
 .error-text {
