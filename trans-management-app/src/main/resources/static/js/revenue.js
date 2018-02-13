@@ -56,7 +56,7 @@ function createDataTable(dataSet) {
 			{
 				title : "Transaction Date",
 				name : "Transaction Date",
-				data : "date"
+				data : "transactionDate"
 			}, {
 				title : "Earning",
 				name : "Earning",

@@ -37,17 +37,19 @@ public class RevenueService {
 			Map<Date, List<VehicleTransactionVO>> vTxnGroup = vTxnList.stream()
 					.collect(groupingBy(VehicleTransactionVO::getTransactionDate));
 			vTxnGroup.forEach((date, txnList) -> {
-				RevenueVO vo = new RevenueVO(vehicleName, date);
+				RevenueVO vo = new RevenueVO();
+				vo.setVehicleName(vehicleName);
+				vo.setTransactionDate(date);
 				vo.setTransactions(txnList);
 				result.add(vo);
 				txnList.stream().forEach(txn -> {
 					if (profitAttributes.contains(txn.getTransactionAttribute()))
-						vo.addEarning(txn.getAmount());
+						vo.setEarning(vo.getEarning() + txn.getAmount());
 					else
-						vo.addExpense(txn.getAmount());
+						vo.setExpense(vo.getExpense() + txn.getAmount());
 
 				});
-				
+				vo.setProfit(vo.getEarning() - vo.getExpense());
 			});
 		}
 		return result;
