@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.sm.app.transmanage.revenue.vo.RevenueVO;
+import com.sm.app.transmanage.revenue.vo.YieldVO;
 import com.sm.app.transmanage.vehicletransaction.business.VehicleTransactionService;
 import com.sm.app.transmanage.vehicletransaction.vo.VehicleTransactionVO;
 
@@ -29,30 +30,91 @@ public class RevenueService {
 	@Value("${sm.profit.vehicle.tx.attribute}")
 	private String profitAttribute;
 
-	public List<RevenueVO> findRevenueForVehicle(String vehicleName) {
+	public RevenueVO findRevenueForVehicle(String vehicleName) {
 		List<VehicleTransactionVO> vTxnList = vehicleTxnService.findVehicleTxn(vehicleName);
 		List<String> profitAttributes = Arrays.asList(profitAttribute.split(","));
-		List<RevenueVO> result = new ArrayList<RevenueVO>();
+		RevenueVO result = new RevenueVO();
 		if (vTxnList != null) {
 			Map<Date, List<VehicleTransactionVO>> vTxnGroup = vTxnList.stream()
 					.collect(groupingBy(VehicleTransactionVO::getTransactionDate));
+			result.setTransactions(vTxnList);
+			result.setByAll(new ArrayList<YieldVO>());
+			result.setByMonth(new ArrayList<YieldVO>());
 			vTxnGroup.forEach((date, txnList) -> {
-				RevenueVO vo = new RevenueVO();
-				vo.setVehicleName(vehicleName);
-				vo.setTransactionDate(date);
-				vo.setTransactions(txnList);
-				result.add(vo);
+				YieldVO yield = new YieldVO();
+				yield.setVehicleName(vehicleName);
+				yield.setTransactionDate(date);
+				yield.setTransactionMonth(getMonth(yield.getTransactionDate().getMonth()));
+				result.getByAll().add(yield);
 				txnList.stream().forEach(txn -> {
 					if (profitAttributes.contains(txn.getTransactionAttribute()))
-						vo.setEarning(vo.getEarning() + txn.getAmount());
+						yield.setEarning(yield.getEarning() + txn.getAmount());
 					else
-						vo.setExpense(vo.getExpense() + txn.getAmount());
+						yield.setExpense(yield.getExpense() + txn.getAmount());
 
 				});
-				vo.setProfit(vo.getEarning() - vo.getExpense());
+				yield.setGain(yield.getEarning() - yield.getExpense());
+			});
+
+			result.getByAll().stream().collect(groupingBy(YieldVO::getTransactionMonth)).forEach((month, list) -> {
+				YieldVO vo = new YieldVO();
+				vo.setVehicleName(vehicleName);
+				vo.setTransactionMonth(month);
+				list.stream().forEach(l -> {
+					vo.setEarning(vo.getEarning() + l.getEarning());
+					vo.setExpense(vo.getExpense() + l.getExpense());
+					vo.setGain(vo.getGain() + l.getGain());
+				});
+				result.getByMonth().add(vo);
 			});
 		}
 		return result;
+	}
+
+	private String getMonth(int month) {
+		String val = "";
+		switch (month) {
+		case 0:
+			val = "Jan";
+			break;
+		case 1:
+			val = "Feb";
+			break;
+		case 2:
+			val = "Mar";
+			break;
+		case 3:
+			val = "Apr";
+			break;
+		case 4:
+			val = "May";
+			break;
+		case 5:
+			val = "Jun";
+			break;
+		case 6:
+			val = "Jul";
+			break;
+		case 7:
+			val = "Aug";
+			break;
+		case 8:
+			val = "Sep";
+			break;
+		case 9:
+			val = "Oct";
+			break;
+		case 10:
+			val = "Nov";
+			break;
+		case 11:
+			val = "Dec";
+			break;
+		default:
+			break;
+		}
+		return val;
+
 	}
 
 }

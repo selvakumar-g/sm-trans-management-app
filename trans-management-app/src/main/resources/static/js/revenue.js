@@ -30,33 +30,38 @@ function vehicleCallback(data) {
 }
 
 function revenueCallback(data) {
-	createDataTable(data != null ? data.details : null)
+	createDataTable("A",
+			data != null && data.details != null ? data.details.byAll : null)
+	createDataTable("M",
+			data != null && data.details != null ? data.details.byMonth : null)
 }
 
-var loanDataTable;
-function createDataTable(dataSet) {
-	if (loanDataTable) {
-		loanDataTable.clear();
+var allDataTable;
+var monthDataTable;
+function createDataTable(key, dataSet) {
+	if ("A" == key && allDataTable) {
+		allDataTable.clear();
 		if (dataSet != null)
-			loanDataTable.rows.add(dataSet);
-		loanDataTable.draw();
+			allDataTable.rows.add(dataSet);
+		allDataTable.draw();
+	} else if ("M" == key && monthDataTable) {
+		monthDataTable.clear();
+		if (dataSet != null)
+			monthDataTable.rows.add(dataSet);
+		monthDataTable.draw();
 	} else if (dataSet != null) {
-		loanDataTable = $('#revenue_data_table').DataTable({
+		var id = "A" == key ? "all_data_table" : "month_data_table"
+		var dt = $('#' + id).DataTable({
 			data : dataSet,
 			dom : 'istp',
-			createdRow : function(row, data, dataIndex) {
-				$(row).addClass(data.sequenceNumber + "");
-			},
 			columns : [ {
 				title : "vehicle Name",
 				name : "Vehicle Name",
 				data : "vehicleName"
-			},
-
-			{
-				title : "Transaction Date",
-				name : "Transaction Date",
-				data : "transactionDate"
+			}, {
+				title : "A" == key ? "Transaction date" : "Transaction month",
+				name : "A" == key ? "Transaction date" : "Transaction month",
+				data : "A" == key ? "transactionDate" : "transactionMonth"
 			}, {
 				title : "Earning",
 				name : "Earning",
@@ -64,13 +69,18 @@ function createDataTable(dataSet) {
 			}, {
 				title : "Expense",
 				name : "Expense",
-				data : "earning"
+				data : "expense"
 			}, {
-				title : "Profit",
-				name : "Profit",
-				data : "profit"
+				title : "Gain",
+				name : "Gain",
+				data : "gain"
 			} ]
 		});
+
+		if ("A" == key)
+			allDataTable = dt;
+		else
+			monthDataTable = dt;
 
 	}
 

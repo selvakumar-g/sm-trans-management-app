@@ -47,13 +47,36 @@
 			</div>
 		</form>
 	</div>
-		<h3 class="bd-title pb-3 titleline">Transactions created</h3>
 		<div class="tile_container pt-3">
 			<div class="row">
 				<table id="revenue_data_table" class="nowrap table table-striped"
 				style="width: 100%;">
 			</table>
 
+		</div>
+	</div>
+		<div class="pt-3" role="tabpanel">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="all-tab"
+					data-toggle="tab" href="#all" role="tab" aria-controls="all"
+					aria-expanded="true">All</a></li>
+				<li class="nav-item"><a class="nav-link" id="month-tab"
+					data-toggle="tab" href="#month" role="tab" aria-controls="month"
+					aria-expanded="false">Month</a></li>
+		</ul>
+			<div class="tab-content pt-3" id="myTabContent">
+				<div role="tabpanel" class="tab-pane fade active show" id="all"
+				aria-labelledby="all-tab" aria-expanded="true">
+					<table id="all_data_table" class="nowrap table table-striped"
+					style="width: 100%;">
+				</table>
+			</div>
+				<div class="tab-pane fade" id="month" role="tabpanel"
+				aria-labelledby="month-tab" aria-expanded="false">
+					<table id="month_data_table" class="nowrap table table-striped"
+					style="width: 100%;">
+				</table>
+			</div>
 		</div>
 	</div>
 	</div>

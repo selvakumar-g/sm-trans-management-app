@@ -1,7 +1,5 @@
 package com.sm.app.transmanage.revenue;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +19,8 @@ public class RevenueController {
 	private RevenueService service;
 
 	@RequestMapping(path = "/revenue/findRevenueForVehicle/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
-	public ResponseEntity<Wrapper<List<RevenueVO>>> findRevenueForVehicle(
-			@PathVariable("vehicleName") String vehicleName) {
-		List<RevenueVO> result = service.findRevenueForVehicle(vehicleName);
-		return new ResponseEntity<Wrapper<List<RevenueVO>>>(new Wrapper<List<RevenueVO>>(result), HttpStatus.OK);
+	public ResponseEntity<Wrapper<RevenueVO>> findRevenueForVehicle(@PathVariable("vehicleName") String vehicleName) {
+		RevenueVO result = service.findRevenueForVehicle(vehicleName);
+		return new ResponseEntity<Wrapper<RevenueVO>>(new Wrapper<RevenueVO>(result), HttpStatus.OK);
 	}
 }
