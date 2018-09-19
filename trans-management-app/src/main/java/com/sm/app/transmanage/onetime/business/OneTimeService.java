@@ -23,8 +23,6 @@ import com.sm.app.transmanage.util.DozerMapper;
 @Service
 public class OneTimeService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OneTimeService.class);
-
 	@Autowired
 	DozerMapper dozerMapper;
 
@@ -33,7 +31,7 @@ public class OneTimeService {
 
 	public List<OneTimeVO> save(OneTimeVO oneTimeVO) {
 		repo.save(dozerMapper.map(oneTimeVO, OneTime.class));
-		return findAll();
+		return find(oneTimeVO.getFieldType());
 	}
 
 	public Map<String, List<OneTimeVO>> findOneTimes(List<String> fieldTypes) {
@@ -58,7 +56,7 @@ public class OneTimeService {
 
 	public List<OneTimeVO> delete(String fieldType, String fieldVal) {
 		repo.delete(new OneTimePK(fieldType, fieldVal));
-		return findAll();
+		return find(fieldType);
 	}
 
 	public List<OneTimeVO> find(String fieldType) {

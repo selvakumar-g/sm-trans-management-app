@@ -44,13 +44,13 @@ public class VehicleController {
 				result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/vehicle/findAll", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle/findAll", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<VehicleVO>>> findAll() {
 		List<VehicleVO> result = vehicleService.findAll();
 		return new ResponseEntity<Wrapper<List<VehicleVO>>>(new Wrapper<List<VehicleVO>>(result), HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/vehicle/delete/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle/delete/{vehicleName}", method = RequestMethod.DELETE, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<VehicleVO>>> delete(@PathVariable("vehicleName") String vehicleName) {
 		List<VehicleTransactionVO> txns = vehicleTxnService.findVehicleTxn(vehicleName);
 		Wrapper<List<VehicleVO>> wrapper = new Wrapper<List<VehicleVO>>();
@@ -62,7 +62,7 @@ public class VehicleController {
 				wrapper.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/vehicle/find/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle/find/{vehicleName}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<VehicleVO>> find(@PathVariable("vehicleName") String vehicleName) {
 		VehicleVO result = vehicleService.find(vehicleName);
 		return new ResponseEntity<Wrapper<VehicleVO>>(new Wrapper<VehicleVO>(result), HttpStatus.OK);

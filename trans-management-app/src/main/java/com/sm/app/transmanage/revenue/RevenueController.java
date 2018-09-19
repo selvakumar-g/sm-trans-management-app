@@ -18,7 +18,7 @@ public class RevenueController {
 	@Autowired
 	private RevenueService service;
 
-	@RequestMapping(path = "/revenue/findRevenueForVehicle/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/revenue/findRevenueForVehicle/{vehicleName}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<RevenueVO>> findRevenueForVehicle(@PathVariable("vehicleName") String vehicleName) {
 		RevenueVO result = service.findRevenueForVehicle(vehicleName);
 		return new ResponseEntity<Wrapper<RevenueVO>>(new Wrapper<RevenueVO>(result), HttpStatus.OK);

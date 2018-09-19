@@ -3,6 +3,7 @@
  */
 package com.sm.app.transmanage.vehicletransaction.business;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,8 @@ public interface VehicleTransactionRepository extends JpaRepository<VehicleTrans
 
 	@Query("select o from VehicleTransaction o where o.vehicleTransactionPK.vehicleName = ?1")
 	public List<VehicleTransaction> findVehicleTxn(String vehicleName);
+	
+	@Query(value="select o from VehicleTransaction o where o.vehicleTransactionPK.vehicleName = ?1 and o.transactionDate = ?2")
+    public List<VehicleTransaction> findVehicleTxnWithDate(String vehicleName, Date transactionDate);
 
 }

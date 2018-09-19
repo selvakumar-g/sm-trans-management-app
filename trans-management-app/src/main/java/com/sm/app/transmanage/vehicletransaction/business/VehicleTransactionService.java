@@ -5,6 +5,7 @@ package com.sm.app.transmanage.vehicletransaction.business;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -45,6 +46,14 @@ public class VehicleTransactionService {
 		repo.save(dozerMapper.map(VehicleTransactionVO, VehicleTransaction.class));
 		return findVehicleTxn(VehicleTransactionVO.getVehicleName());
 	}
+	
+	public void save(List<VehicleTransactionVO> VehicleTransactionVOs) {
+		VehicleTransactionVOs.stream().forEach(vo -> {
+			vo.setSequenceNumber(sequenceGen.nextLongValue());
+			vo.setLastupdatedTime(Timestamp.valueOf(LocalDateTime.now()));
+			repo.save(dozerMapper.map(vo, VehicleTransaction.class));			
+		});		
+	}
 
 	public List<VehicleTransactionVO> delete(String vehicleName, long sequenceNumber) {
 		repo.delete(new VehicleTransactionPK(vehicleName, sequenceNumber));
@@ -58,6 +67,11 @@ public class VehicleTransactionService {
 
 	public List<VehicleTransactionVO> findVehicleTxn(String vehicleName) {
 		return dozerMapper.mapList(repo.findVehicleTxn(vehicleName), VehicleTransactionVO.class);
+	}
+
+	public List<VehicleTransactionVO> findVehicleTxn(String vehicleName, Date transactionDate) {
+		return this.dozerMapper.mapList(this.repo.findVehicleTxnWithDate(vehicleName, transactionDate),
+				VehicleTransactionVO.class);
 	}
 
 }

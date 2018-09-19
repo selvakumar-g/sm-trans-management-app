@@ -2,6 +2,10 @@ package com.sm.app.transmanage.vehicletransaction;
 
 import static java.util.stream.Collectors.toMap;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -24,20 +28,42 @@ import com.sm.app.transmanage.vehicletransaction.vo.VehicleTransactionVO;
 @RestController
 public class VehicleTransactionController {
 
+	private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MMM-yyyy");
+
 	@Autowired
 	private VehicleTransactionService vehicleTransactionService;
 
-	@RequestMapping(path = "/vehicle_txn/findAll", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle_txn/findAll", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<VehicleTransactionVO>>> findAll() {
 		List<VehicleTransactionVO> result = vehicleTransactionService.findAll();
 		return new ResponseEntity<Wrapper<List<VehicleTransactionVO>>>(new Wrapper<List<VehicleTransactionVO>>(result),
 				HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/vehicle_txn/findVehicleTxn/{vehicleName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle_txn/findVehicleTxn/{vehicleName}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<VehicleTransactionVO>>> findVehicleTxn(
 			@PathVariable("vehicleName") String vehicleName) {
 		List<VehicleTransactionVO> result = vehicleTransactionService.findVehicleTxn(vehicleName);
+		return new ResponseEntity<Wrapper<List<VehicleTransactionVO>>>(new Wrapper<List<VehicleTransactionVO>>(result),
+				HttpStatus.OK);
+	}
+
+	@RequestMapping(path = { "/vehicle_txn/findVehicleTxn/{vehicleName}/{transactionDate}" }, method = {
+			RequestMethod.GET }, produces = { "application/JSON" })
+	public ResponseEntity<Wrapper<List<VehicleTransactionVO>>> findVehicleTxn(
+			@PathVariable(value = "vehicleName") String vehicleName,
+			@PathVariable(value = "transactionDate") String transactionDate) {
+
+		Date txnDate = null;
+		try {
+			txnDate = SDF.parse(transactionDate);
+		} catch (ParseException pse) {
+			Wrapper<List<VehicleTransactionVO>> wrapper = new Wrapper<>();
+			wrapper.addError("Transaction date parsing failed", Arrays.asList(transactionDate));
+			return new ResponseEntity<Wrapper<List<VehicleTransactionVO>>>(
+					new Wrapper<List<VehicleTransactionVO>>(null), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		List<VehicleTransactionVO> result = this.vehicleTransactionService.findVehicleTxn(vehicleName, txnDate);
 		return new ResponseEntity<Wrapper<List<VehicleTransactionVO>>>(new Wrapper<List<VehicleTransactionVO>>(result),
 				HttpStatus.OK);
 	}
@@ -55,7 +81,19 @@ public class VehicleTransactionController {
 				result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/vehicle_txn/delete/{vehicleName}/{sequenceNumber}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle_txn/batch", method = RequestMethod.POST, produces = "application/JSON")
+	public ResponseEntity<Wrapper<String>> batch(@Valid @RequestBody List<VehicleTransactionVO> VehicleTransactionVOs,
+			Errors errors) {
+		Wrapper<List<VehicleTransactionVO>> result = new Wrapper<List<VehicleTransactionVO>>();
+		if (errors != null && errors.hasErrors()) {
+			result.setErrorDetails(errors.getAllErrors().stream().collect(toMap(ObjectError::getDefaultMessage, null)));
+		} else {
+			vehicleTransactionService.save(VehicleTransactionVOs);
+		}
+		return new ResponseEntity<Wrapper<String>>(result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
+	}
+
+	@RequestMapping(path = "/vehicle_txn/delete/{vehicleName}/{sequenceNumber}", method = RequestMethod.DELETE, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<VehicleTransactionVO>>> delete(@PathVariable("vehicleName") String vehicleName,
 			@PathVariable("sequenceNumber") long sequenceNumber) {
 		List<VehicleTransactionVO> result = vehicleTransactionService.delete(vehicleName, sequenceNumber);
@@ -63,7 +101,7 @@ public class VehicleTransactionController {
 				HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/vehicle_txn/find/{vehicleName}/{sequenceNumber}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/vehicle_txn/find/{vehicleName}/{sequenceNumber}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<VehicleTransactionVO>> find(@PathVariable("vehicleName") String vehicleName,
 			@PathVariable("sequenceNumber") long sequenceNumber) {
 		VehicleTransactionVO result = vehicleTransactionService.find(vehicleName, sequenceNumber);

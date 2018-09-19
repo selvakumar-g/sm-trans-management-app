@@ -27,14 +27,14 @@ public class LoanTransactionController {
 	@Autowired
 	private LoanTransactionService loanTransactionService;
 
-	@RequestMapping(path = "/loan_txn/findAll", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan_txn/findAll", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<LoanTransactionVO>>> findAll() {
 		List<LoanTransactionVO> result = loanTransactionService.findAll();
 		return new ResponseEntity<Wrapper<List<LoanTransactionVO>>>(new Wrapper<List<LoanTransactionVO>>(result),
 				HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/loan_txn/findLoanTxn/{loanName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan_txn/findLoanTxn/{loanName}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<LoanTransactionVO>>> findLoanTxn(@PathVariable("loanName") String loanName) {
 		List<LoanTransactionVO> result = loanTransactionService.findLoanTxn(loanName);
 		return new ResponseEntity<Wrapper<List<LoanTransactionVO>>>(new Wrapper<List<LoanTransactionVO>>(result),
@@ -53,7 +53,7 @@ public class LoanTransactionController {
 				result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/loan_txn/delete/{loanName}/{sequenceNumber}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan_txn/delete/{loanName}/{sequenceNumber}", method = RequestMethod.DELETE, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<LoanTransactionVO>>> delete(@PathVariable("loanName") String loanName,
 			@PathVariable("sequenceNumber") long sequenceNumber) {
 		List<LoanTransactionVO> result = loanTransactionService.delete(loanName, sequenceNumber);
@@ -61,7 +61,7 @@ public class LoanTransactionController {
 				HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/loan_txn/find/{loanName}/{sequenceNumber}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan_txn/find/{loanName}/{sequenceNumber}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<LoanTransactionVO>> find(@PathVariable("loanName") String loanName,
 			@PathVariable("sequenceNumber") long sequenceNumber) {
 		LoanTransactionVO result = loanTransactionService.find(loanName, sequenceNumber);

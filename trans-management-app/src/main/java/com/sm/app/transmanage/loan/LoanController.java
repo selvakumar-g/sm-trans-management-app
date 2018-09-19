@@ -50,13 +50,13 @@ public class LoanController {
 				result.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/loan/findAll", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan/findAll", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<LoanVO>>> findAll() {
 		List<LoanVO> result = loanService.findAll();
 		return new ResponseEntity<Wrapper<List<LoanVO>>>(new Wrapper<List<LoanVO>>(result), HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/loan/delete/{loanName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan/delete/{loanName}", method = RequestMethod.DELETE, produces = "application/JSON")
 	public ResponseEntity<Wrapper<List<LoanVO>>> delete(@PathVariable("loanName") String loanName) {
 		List<VehicleVO> vehicles = vehicleService.findVehicleLoans(loanName);
 		List<LoanTransactionVO> txns = loanTxnService.findLoanTxn(loanName);
@@ -74,7 +74,7 @@ public class LoanController {
 				wrapper.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/loan/find/{loanName}", method = RequestMethod.POST, produces = "application/JSON")
+	@RequestMapping(path = "/loan/find/{loanName}", method = RequestMethod.GET, produces = "application/JSON")
 	public ResponseEntity<Wrapper<LoanVO>> find(@PathVariable("loanName") String loanName) {
 		LoanVO result = loanService.find(loanName);
 		return new ResponseEntity<Wrapper<LoanVO>>(new Wrapper<LoanVO>(result), HttpStatus.OK);
