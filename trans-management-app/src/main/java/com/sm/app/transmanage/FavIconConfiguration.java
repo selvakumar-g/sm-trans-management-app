@@ -9,11 +9,11 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
-@Configuration
+//@Configuration
 public class FavIconConfiguration {
 
 	
-	@Bean
+	//@Bean
 	public SimpleUrlHandlerMapping faviconHandlerMapping() {
 	    SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
 	    mapping.setOrder(Integer.MIN_VALUE);
@@ -22,7 +22,7 @@ public class FavIconConfiguration {
 	    return mapping;
 	}
 
-	@Bean
+	//@Bean
 	protected ResourceHttpRequestHandler faviconRequestHandler() {
 	    ResourceHttpRequestHandler requestHandler = new ResourceHttpRequestHandler();
 	    requestHandler.setLocations(Arrays.asList(new ClassPathResource("/")));
