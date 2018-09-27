@@ -73,5 +73,19 @@ public class VehicleTransactionService {
 		return this.dozerMapper.mapList(this.repo.findVehicleTxnWithDate(vehicleName, transactionDate),
 				VehicleTransactionVO.class);
 	}
+	
+	public List<String> findVehicleTxnYears(String vehicleName){
+		return repo.findVehicleTxnYears(vehicleName);
+	}
+	
+	public List<VehicleTransactionVO> findVehRevenueForDateRange(String vehicleName, Date fromDate, Date toDate){
+		return this.dozerMapper.mapList(this.repo.findVehRevenueForDateRange(vehicleName, fromDate, toDate),
+				VehicleTransactionVO.class);
+	}
+	
+	public List<VehicleTransactionVO> findVehRevenueForDateRangeAttr(String vehicleName, Date fromDate, Date toDate, String attribute){
+		return this.dozerMapper.mapList(this.repo.findVehRevenueForDateRangeAttr(vehicleName, fromDate, toDate, attribute),
+				VehicleTransactionVO.class);
+	}
 
 }

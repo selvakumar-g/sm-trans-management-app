@@ -2,7 +2,6 @@ package com.sm.app.transmanage.revenue.vo;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 import lombok.Data;
 
@@ -14,5 +13,7 @@ public @Data class RevenueVO implements Serializable {
 	
 	public static final String BY_MONTH = "byMonth";
 	
-	private Map<String, Map<String, List<YieldVO>>> transactions;
+	private List<YieldVO> byAll;
+	
+	private List<YieldVO> byMonth;
 }
